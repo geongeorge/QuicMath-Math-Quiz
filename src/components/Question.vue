@@ -1,20 +1,20 @@
 <template>
   <div class="container hello">
-    <p class="question">What is <span class="bld">4 + 2</span>?</p>
+    <p class="question">What is <span class="bld">{{valA}} + {{valB}}</span>?</p>
     <div class="columns answers">
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">3</button>
+        <button class="button is-light is-large is-fullwidth">{{options[0]}}</button>
       </div>
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">3</button>
+        <button class="button is-light is-large is-fullwidth">{{options[1]}}</button>
       </div>
     </div>
     <div class="columns answers">
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">3</button>
+        <button class="button is-light is-large is-fullwidth">{{options[2]}}</button>
       </div>
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">3</button>
+        <button class="button is-light is-large is-fullwidth">{{options[3]}}</button>
       </div>
     </div>
   </div>
@@ -22,9 +22,42 @@
 
 <script>
 export default {
+  props: {
+    valA: {default: 0},
+    valB: {default: 0},
+  },
   data() {
     return {
+      options: [0,0,0,0]
+    }
+  },
+  methods: {
+      getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
+      changed() { 
+        this.options.forEach((item, index, arr)=>{
+          let randomval = 0;
+           do {
+            randomval = this.getRandomInt(this.answer-5,this.answer+5)
+           } while(this.options.slice(0,index+1).indexOf(parseInt(randomval)) != -1) //for each value to be unique
+          arr[index] = randomval          
+        });
 
+        this.options[this.getRandomInt(0,3)]=this.answer;
+      }
+  },
+  computed: {
+    answer() {
+      return this.valB+this.valA
+    }
+  },
+  watch: {
+    valA(newv,oldv) {
+      this.changed()
+    },
+    valB(newv,oldv) {
+      this.changed()
     }
   }
 }

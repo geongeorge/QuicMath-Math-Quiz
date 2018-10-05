@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Question></Question>
+    <Question :valA="valA" :valB="valB"></Question>
   </div>
 </template>
 
@@ -11,6 +11,23 @@ export default {
   name: 'app',
   components: {
     Question
+  },
+  data() {
+    return {
+      valA : 0,
+      valB : 0,
+      min: 1,
+      max: 30,
+    }
+  },
+  methods : {
+    setRandomInt(){
+      this.valA = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+      this.valB = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+    }
+  },
+  mounted() {
+    this.setRandomInt()
   }
 }
 </script>
