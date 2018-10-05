@@ -40,7 +40,7 @@ export default {
           let randomval = 0;
            do {
             randomval = this.getRandomInt(this.answer-5,this.answer+5)
-           } while(this.options.slice(0,index+1).indexOf(parseInt(randomval)) != -1) //for each value to be unique
+           } while(randomval == this.answer || this.options.slice(0,index+1).indexOf(parseInt(randomval)) != -1) //for each value to be unique
           arr[index] = randomval          
         });
 
