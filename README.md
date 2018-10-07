@@ -1,6 +1,9 @@
 # QuicMath - Math Test
 You know what you really want? Unlimited math questions! Yeah more and more math!
 
+## Demo
+Link: [Demo](https://geongeorge.github.io/QuicMath-Math-Quiz/)
+
 ## Project setup
 ```
 npm install
