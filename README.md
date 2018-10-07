@@ -2,7 +2,7 @@
 You know what you really want? Unlimited math questions! Yeah more and more math!
 
 ## Demo
-Link: [Demo](https://geongeorge.github.io/QuicMath-Math-Quiz/)
+Link: [QuicMath Math Quiz](https://geongeorge.github.io/QuicMath-Math-Quiz/)
 
 ## Project setup
 ```
