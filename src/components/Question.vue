@@ -1,23 +1,25 @@
 <template>
-  <div class="container hello">
+<section class="section">
+  <div class="container box hello">
     <p class="question">What is <span class="bld">{{valA}} + {{valB}}</span>?</p>
-    <div class="columns answers">
+    <div class="columns is-mobile answers">
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">{{options[0]}}</button>
+        <button class="button is-light is-large is-fullwidth" @click="choosed(0)">{{options[0]}}</button>
       </div>
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">{{options[1]}}</button>
+        <button class="button is-light is-large is-fullwidth" @click="choosed(1)">{{options[1]}}</button>
       </div>
     </div>
-    <div class="columns answers">
+    <div class="columns is-mobile answers">
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">{{options[2]}}</button>
+        <button class="button is-light is-large is-fullwidth" @click="choosed(2)">{{options[2]}}</button>
       </div>
       <div class="column">
-        <button class="button is-light is-large is-fullwidth">{{options[3]}}</button>
+        <button class="button is-light is-large is-fullwidth" @click="choosed(3)">{{options[3]}}</button>
       </div>
     </div>
   </div>
+</section>
 </template>
 
 <script>
@@ -41,10 +43,18 @@ export default {
            do {
             randomval = this.getRandomInt(this.answer-5,this.answer+5)
            } while(randomval == this.answer || this.options.slice(0,index+1).indexOf(parseInt(randomval)) != -1) //for each value to be unique
-          arr[index] = randomval          
+          this.$set(this.options, index, randomval);
+          // this.options[index] = randomval  
         });
-
-        this.options[this.getRandomInt(0,3)]=this.answer;
+        // this.options[this.getRandomInt(0,3)]=this.answer;
+        this.$set(this.options, this.getRandomInt(0,3), this.answer);
+      },
+      choosed(val) {
+        if(this.options[val]==this.answer) {
+          this.$emit("answered",{correct: true, answer : this.answer});
+        } else {
+          this.$emit("answered",{correct: false, answer : this.answer});
+        }
       }
   },
   computed: {
@@ -53,12 +63,18 @@ export default {
     }
   },
   watch: {
-    valA(newv,oldv) {
+    myvalA(newv,oldv) {
       this.changed()
     },
-    valB(newv,oldv) {
+    myvalA(newv,oldv) {
+      this.changed()
+    },
+    answer(newv,oldv) {
       this.changed()
     }
+  },
+  mounted() {
+    this.changed()
   }
 }
 </script>
@@ -67,7 +83,7 @@ export default {
 <style scoped>
 .hello {
   color: #636363;
-  font-size: 40px;
+  font-size: 28px;
   max-width: 400px;
   margin: 0 auto;
 }
@@ -86,5 +102,13 @@ export default {
 .answers .columnn{
   padding-left: 10px;
   padding-right: 10px;
+}
+/* .box {
+  min-height: 350px;
+} */
+p {
+    text-align: center;
+    margin: 20px 0 30px!important;
+    font-size: 1.25em;
 }
 </style>
