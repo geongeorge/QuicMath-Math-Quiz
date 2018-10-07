@@ -1,4 +1,5 @@
-# math-quiz
+# QuicMath - Math Test
+You know what you really want? Unlimited math questions! Yeah more and more math!
 
 ## Project setup
 ```
